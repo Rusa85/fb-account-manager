@@ -1,141 +1,591 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FB Account Manager</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f3f5fa;font-family:Arial,sans-serif;color:#202638}
-header{background:#2074e8;color:white;padding:20px;font-size:22px;font-weight:bold}
-main{padding:14px;max-width:1100px;margin:auto}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
-.stat{background:white;border-radius:12px;text-align:center;padding:15px 3px}
-.stat b{display:block;font-size:23px}
-.stat small{font-size:10px;color:#697386}
-.green{color:#16965b}.red{color:#d53b4e}.orange{color:#c78b1b}
-.panel{background:white;padding:15px;border-radius:16px}
-h3{margin:5px 0 18px}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-input,select{padding:11px;border:1px solid #d7dce5;border-radius:9px;font-size:14px;min-width:0}
-#search{width:100%;margin-bottom:12px}
-#name{flex:1;min-width:140px}
-button{border:0;background:#7138db;color:white;padding:11px 15px;border-radius:9px;cursor:pointer}
-button.delete{background:#dc4656}
-.tablewrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:510px}
-th,td{padding:12px 8px;text-align:left;border-bottom:1px solid #e9edf2}
-th{background:#f0f3f8}
-tr:nth-child(even){background:#f8fafc}
-.pill{border-radius:20px;padding:5px 9px;font-weight:bold;font-size:11px}
-.live{background:#e1f8eb;color:#16864c}
-.dead{background:#fde7ea;color:#bb3548}
-.unknown{background:#fff3db;color:#a66c00}
-.note{font-size:12px;color:#64748b;margin-top:14px;line-height:1.5}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f3f5fa;
+  font-family: Arial, sans-serif;
+  color: #202638;
+}
+
+header {
+  background: #2074e8;
+  color: white;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+main {
+  padding: 14px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+.stat {
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  padding: 15px 3px;
+}
+
+.stat b {
+  display: block;
+  font-size: 23px;
+}
+
+.stat small {
+  font-size: 10px;
+  color: #697386;
+}
+
+.green {
+  color: #16965b;
+}
+
+.red {
+  color: #d53b4e;
+}
+
+.orange {
+  color: #c78b1b;
+}
+
+.panel {
+  background: white;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+h3 {
+  margin: 5px 0 18px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+input, select {
+  padding: 11px;
+  border: 1px solid #d7dce5;
+  border-radius: 9px;
+  font-size: 14px;
+  min-width: 0;
+}
+
+#search {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+#name {
+  flex: 1;
+  min-width: 140px;
+}
+
+button {
+  border: 0;
+  background: #7138db;
+  color: white;
+  padding: 11px 15px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+button.delete {
+  background: #dc4656;
+}
+
+button.edit {
+  background: #2074e8;
+  margin-right: 6px;
+}
+
+.tablewrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  min-width: 510px;
+}
+
+th, td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid #e9edf2;
+}
+
+th {
+  background: #f0f3f8;
+}
+
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.note {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 14px;
+  line-height: 1.5;
+}
 </style>
 </head>
+
 <body>
-<header>FB Account Manager</header>
+
+<header>
+  FB Account Manager
+</header>
+
 <main>
+
 <section class="stats">
-<div class="stat"><b id="total">0</b><small>TOTAL</small></div>
-<div class="stat"><b class="green" id="live">0</b><small>LIVE</small></div>
-<div class="stat"><b class="red" id="dead">0</b><small>DEAD</small></div>
-<div class="stat"><b class="orange" id="unknown">0</b><small>UNKNOWN</small></div>
+
+  <div class="stat">
+    <b id="total">0</b>
+    <small>TOTAL</small>
+  </div>
+
+  <div class="stat">
+    <b class="green" id="live">0</b>
+    <small>LIVE</small>
+  </div>
+
+  <div class="stat">
+    <b class="red" id="dead">0</b>
+    <small>DEAD</small>
+  </div>
+
+  <div class="stat">
+    <b class="orange" id="unknown">0</b>
+    <small>UNKNOWN</small>
+  </div>
+
 </section>
+
 <section class="panel">
+
 <h3>Account Dashboard</h3>
-<input id="search" placeholder="🔍 Cari nama akun...">
+
+<input
+  id="search"
+  placeholder="🔍 Cari nama akun..."
+>
+
 <div class="controls">
-<input id="name" placeholder="Nama akun">
-<select id="newStatus">
-<option value="UNKNOWN">UNKNOWN</option>
-<option value="LIVE">LIVE</option>
-<option value="DEAD">DEAD</option>
-</select>
-<button onclick="addAccount()">+ Tambah</button>
+
+  <input
+    id="name"
+    placeholder="Nama akun"
+  >
+
+  <select id="newStatus">
+    <option value="UNKNOWN">UNKNOWN</option>
+    <option value="LIVE">LIVE</option>
+    <option value="DEAD">DEAD</option>
+  </select>
+
+  <button onclick="addAccount()">
+    + Tambah
+  </button>
+
 </div>
+
 <div class="controls">
-<button class="delete" onclick="deleteSelected()">Hapus Terpilih</button>
+
+  <button
+    class="delete"
+    onclick="deleteSelected()"
+  >
+    Hapus Terpilih
+  </button>
+
 </div>
+
 <div class="tablewrap">
+
 <table>
-<thead><tr>
-<th><input type="checkbox" id="all" onchange="selectAll(this.checked)"></th>
-<th>NO</th><th>ACCOUNT</th><th>STATUS</th><th>ASSIGNED TO</th><th>AKSI</th>
-</tr></thead>
-<tbody id="rows"></tbody>
+
+<thead>
+<tr>
+  <th>
+    <input
+      type="checkbox"
+      id="all"
+      onchange="selectAll(this.checked)"
+    >
+  </th>
+
+  <th>NO</th>
+  <th>ACCOUNT</th>
+  <th>STATUS</th>
+  <th>ASSIGNED TO</th>
+  <th>AKSI</th>
+</tr>
+</thead>
+
+<tbody id="rows">
+</tbody>
+
 </table>
+
 </div>
-<p class="note">Status akun diisi manual, bukan hasil pemeriksaan Facebook. Data tersimpan hanya pada browser dan perangkat ini. Jangan masukkan password, token, atau cookies login.</p>
+
+<p class="note">
+Status akun diisi manual, bukan hasil pemeriksaan Facebook.
+Data tersimpan hanya pada browser dan perangkat ini.
+Jangan masukkan password, token, atau cookies login.
+</p>
+
 </section>
+
 </main>
+
 <script>
-const KEY="fbmanager_accounts_v2";
-let accounts=[];
-try{
-const saved=JSON.parse(localStorage.getItem(KEY)||"[]");
-if(Array.isArray(saved)) accounts=saved;
-}catch(e){accounts=[]}
-const $=id=>document.getElementById(id);
-function save(){localStorage.setItem(KEY,JSON.stringify(accounts));render()}
-function addAccount(){
-const name=$("name").value.trim();
-if(!name)return alert("Masukkan nama akun");
-accounts.push({id:Date.now()+"-"+Math.random(),name,status:$("newStatus").value,assigned:"Unassigned"});
-$("name").value="";
-save();
+
+const KEY = "fbmanager_accounts_v2";
+
+let accounts = [];
+
+try {
+  const saved = JSON.parse(
+    localStorage.getItem(KEY) || "[]"
+  );
+
+  if (Array.isArray(saved)) {
+    accounts = saved;
+  }
+
+} catch (e) {
+  accounts = [];
 }
-function changeStatus(id,value){
-const a=accounts.find(x=>x.id===id);
-if(a){a.status=value;save()}
+
+const $ = id => document.getElementById(id);
+
+
+// SIMPAN DATA
+
+function save() {
+
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(accounts)
+  );
+
+  render();
+
 }
-function deleteOne(id){
-if(confirm("Hapus akun ini?")){
-accounts=accounts.filter(x=>x.id!==id);save()
+
+
+// TAMBAH AKUN
+
+function addAccount() {
+
+  const name = $("name").value.trim();
+
+  if (!name) {
+    return alert("Masukkan nama akun");
+  }
+
+  accounts.push({
+
+    id: Date.now() + "-" + Math.random(),
+
+    name: name,
+
+    status: $("newStatus").value,
+
+    assigned: "Unassigned"
+
+  });
+
+  $("name").value = "";
+
+  save();
+
 }
+
+
+// EDIT NAMA AKUN
+
+function editAccount(id) {
+
+  const account = accounts.find(
+    x => x.id === id
+  );
+
+  if (!account) return;
+
+  const newName = prompt(
+    "Masukkan nama akun baru:",
+    account.name
+  );
+
+  if (newName === null) return;
+
+  const cleanName = newName.trim();
+
+  if (!cleanName) {
+    return alert("Nama akun tidak boleh kosong");
+  }
+
+  account.name = cleanName;
+
+  save();
+
 }
-function selectAll(checked){
-document.querySelectorAll(".pick").forEach(x=>x.checked=checked);
+
+
+// UBAH STATUS
+
+function changeStatus(id, value) {
+
+  const account = accounts.find(
+    x => x.id === id
+  );
+
+  if (account) {
+
+    account.status = value;
+
+    save();
+
+  }
+
 }
-function deleteSelected(){
-const ids=[...document.querySelectorAll(".pick:checked")].map(x=>x.value);
-if(!ids.length)return alert("Pilih akun terlebih dahulu");
-if(confirm("Hapus "+ids.length+" akun?")){
-accounts=accounts.filter(x=>!ids.includes(x.id));save()
+
+
+// HAPUS SATU AKUN
+
+function deleteOne(id) {
+
+  if (confirm("Hapus akun ini?")) {
+
+    accounts = accounts.filter(
+      x => x.id !== id
+    );
+
+    save();
+
+  }
+
 }
+
+
+// PILIH SEMUA AKUN
+
+function selectAll(checked) {
+
+  document.querySelectorAll(".pick")
+    .forEach(x => x.checked = checked);
+
 }
-function render(){
-$("total").textContent=accounts.length;
-["LIVE","DEAD","UNKNOWN"].forEach(s=>{
-$(s.toLowerCase()).textContent=accounts.filter(a=>a.status===s).length
-});
-$("all").checked=false;
-const q=$("search").value.toLowerCase();
-const tbody=$("rows");tbody.replaceChildren();
-accounts.filter(a=>a.name.toLowerCase().includes(q)).forEach((a,i)=>{
-const tr=document.createElement("tr");
-const pick=document.createElement("input");
-pick.type="checkbox";pick.className="pick";pick.value=a.id;
-const td0=document.createElement("td");td0.append(pick);
-const td1=document.createElement("td");td1.textContent=i+1;
-const td2=document.createElement("td");td2.textContent=a.name;
-const td3=document.createElement("td");
-const sel=document.createElement("select");
-["UNKNOWN","LIVE","DEAD"].forEach(s=>{
-const o=document.createElement("option");o.value=s;o.textContent=s;sel.append(o)
-});
-sel.value=a.status;sel.onchange=()=>changeStatus(a.id,sel.value);td3.append(sel);
-const td4=document.createElement("td");td4.textContent=a.assigned;
-const td5=document.createElement("td");
-const btn=document.createElement("button");btn.className="delete";btn.textContent="Hapus";
-btn.onclick=()=>deleteOne(a.id);td5.append(btn);
-tr.append(td0,td1,td2,td3,td4,td5);tbody.append(tr)
-});
+
+
+// HAPUS AKUN TERPILIH
+
+function deleteSelected() {
+
+  const ids = [
+    ...document.querySelectorAll(".pick:checked")
+  ].map(x => x.value);
+
+  if (!ids.length) {
+    return alert("Pilih akun terlebih dahulu");
+  }
+
+  if (confirm("Hapus " + ids.length + " akun?")) {
+
+    accounts = accounts.filter(
+      x => !ids.includes(x.id)
+    );
+
+    save();
+
+  }
+
 }
-$("search").addEventListener("input",render);
+
+
+// TAMPILKAN DASHBOARD
+
+function render() {
+
+  $("total").textContent = accounts.length;
+
+  ["LIVE", "DEAD", "UNKNOWN"].forEach(status => {
+
+    $(status.toLowerCase()).textContent =
+      accounts.filter(
+        a => a.status === status
+      ).length;
+
+  });
+
+  $("all").checked = false;
+
+  const query = $("search").value.toLowerCase();
+
+  const tbody = $("rows");
+
+  tbody.replaceChildren();
+
+
+  accounts
+    .filter(a => a.name.toLowerCase().includes(query))
+    .forEach((account, index) => {
+
+      const tr = document.createElement("tr");
+
+
+      // CHECKBOX
+
+      const pick = document.createElement("input");
+
+      pick.type = "checkbox";
+
+      pick.className = "pick";
+
+      pick.value = account.id;
+
+      const td0 = document.createElement("td");
+
+      td0.append(pick);
+
+
+      // NOMOR
+
+      const td1 = document.createElement("td");
+
+      td1.textContent = index + 1;
+
+
+      // NAMA AKUN
+
+      const td2 = document.createElement("td");
+
+      td2.textContent = account.name;
+
+
+      // STATUS
+
+      const td3 = document.createElement("td");
+
+      const select = document.createElement("select");
+
+      ["UNKNOWN", "LIVE", "DEAD"].forEach(status => {
+
+        const option = document.createElement("option");
+
+        option.value = status;
+
+        option.textContent = status;
+
+        select.append(option);
+
+      });
+
+      select.value = account.status;
+
+      select.onchange = () =>
+        changeStatus(account.id, select.value);
+
+      td3.append(select);
+
+
+      // ASSIGNED TO
+
+      const td4 = document.createElement("td");
+
+      td4.textContent = account.assigned;
+
+
+      // TOMBOL AKSI
+
+      const td5 = document.createElement("td");
+
+
+      // TOMBOL EDIT
+
+      const editButton = document.createElement("button");
+
+      editButton.className = "edit";
+
+      editButton.textContent = "Edit";
+
+      editButton.onclick = () =>
+        editAccount(account.id);
+
+
+      // TOMBOL HAPUS
+
+      const deleteButton = document.createElement("button");
+
+      deleteButton.className = "delete";
+
+      deleteButton.textContent = "Hapus";
+
+      deleteButton.onclick = () =>
+        deleteOne(account.id);
+
+
+      td5.append(editButton, deleteButton);
+
+
+      // MASUKKAN KE TABEL
+
+      tr.append(
+        td0,
+        td1,
+        td2,
+        td3,
+        td4,
+        td5
+      );
+
+      tbody.append(tr);
+
+    });
+
+}
+
+
+// PENCARIAN
+
+$("search").addEventListener(
+  "input",
+  render
+);
+
+
+// TAMPILKAN SAAT WEBSITE DIBUKA
+
 render();
+
 </script>
+
 </body>
 </html>
