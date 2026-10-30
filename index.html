@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,103 +13,137 @@
 
 body {
   margin: 0;
-  background: #f3f5fa;
+  background: #f4f6fb;
   font-family: Arial, sans-serif;
   color: #202638;
 }
+
+/* HEADER */
 
 header {
   background: #2074e8;
   color: white;
   padding: 20px;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: bold;
+  box-shadow: 0 3px 10px #0001;
 }
 
 main {
-  padding: 14px;
-  max-width: 1100px;
+  padding: 15px;
+  max-width: 1200px;
   margin: auto;
 }
+
+/* STATISTIK */
 
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 7px;
-  margin-bottom: 18px;
+  gap: 8px;
+  margin-bottom: 20px;
 }
 
 .stat {
   background: white;
-  border-radius: 12px;
+  border-radius: 13px;
+  padding: 17px 5px;
   text-align: center;
-  padding: 15px 3px;
+  box-shadow: 0 2px 8px #00000008;
 }
 
 .stat b {
   display: block;
-  font-size: 23px;
+  font-size: 25px;
+  margin-bottom: 5px;
 }
 
 .stat small {
-  font-size: 10px;
-  color: #697386;
+  color: #778196;
+  font-size: 11px;
+  font-weight: bold;
 }
 
 .green {
-  color: #16965b;
+  color: #16865b;
 }
 
 .red {
-  color: #d53b4e;
+  color: #dc3545;
 }
 
 .orange {
-  color: #c78b1b;
+  color: #c58b19;
 }
+
+/* PANEL */
 
 .panel {
   background: white;
-  padding: 15px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow: 0 3px 15px #00000008;
 }
 
 h3 {
-  margin: 5px 0 18px;
+  font-size: 20px;
+  margin: 4px 0 18px;
 }
+
+/* INPUT */
 
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 9px;
+  margin-bottom: 13px;
 }
 
-input, select {
-  padding: 11px;
-  border: 1px solid #d7dce5;
-  border-radius: 9px;
+input,
+select {
+  padding: 12px;
+  border: 1px solid #dce2eb;
+  border-radius: 10px;
   font-size: 14px;
-  min-width: 0;
+  background: white;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #7138db;
 }
 
 #search {
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 13px;
+  padding: 14px;
 }
 
 #name {
   flex: 1;
-  min-width: 140px;
+  min-width: 130px;
 }
 
+/* BUTTON */
+
 button {
-  border: 0;
+  border: none;
   background: #7138db;
   color: white;
-  padding: 11px 15px;
-  border-radius: 9px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+button.add {
+  background: linear-gradient(135deg, #8b52ef, #6929d7);
 }
 
 button.delete {
@@ -117,39 +152,139 @@ button.delete {
 
 button.edit {
   background: #2074e8;
-  margin-right: 6px;
+  margin-right: 5px;
 }
+
+/* TABLE */
 
 .tablewrap {
   overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e5e9f0;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
-  min-width: 510px;
+  font-size: 13px;
+  min-width: 650px;
 }
 
-th, td {
-  padding: 12px 8px;
+th,
+td {
+  padding: 13px 10px;
   text-align: left;
-  border-bottom: 1px solid #e9edf2;
+  border-bottom: 1px solid #e8edf3;
 }
 
 th {
   background: #f0f3f8;
+  color: #586276;
+  font-size: 11px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 tr:nth-child(even) {
-  background: #f8fafc;
+  background: #f8faff;
 }
+
+tr:hover {
+  background: #eef5ff;
+}
+
+/* STATUS */
+
+.status {
+  border-radius: 20px;
+  padding: 6px 11px;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+}
+
+.status-live {
+  background: #e5f8ed;
+  color: #16864c;
+}
+
+.status-dead {
+  background: #fde8eb;
+  color: #c33348;
+}
+
+.status-unknown {
+  background: #fff3dc;
+  color: #a56c00;
+}
+
+/* CHECKBOX */
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #7138db;
+}
+
+/* CATATAN */
 
 .note {
   font-size: 12px;
   color: #64748b;
-  margin-top: 14px;
-  line-height: 1.5;
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+/* HP */
+
+@media (max-width: 600px) {
+
+  header {
+    font-size: 21px;
+    padding: 20px 16px;
+  }
+
+  main {
+    padding: 12px;
+  }
+
+  .stats {
+    gap: 6px;
+  }
+
+  .stat {
+    padding: 15px 2px;
+    border-radius: 12px;
+  }
+
+  .stat b {
+    font-size: 23px;
+  }
+
+  .stat small {
+    font-size: 10px;
+  }
+
+  .panel {
+    padding: 13px;
+  }
+
+  #name {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  #newStatus {
+    flex: 1;
+  }
+
+  button.add {
+    flex: 1;
+  }
+
+  .controls button {
+    min-height: 43px;
+  }
 }
 </style>
 </head>
@@ -161,6 +296,8 @@ tr:nth-child(even) {
 </header>
 
 <main>
+
+<!-- STATISTIK -->
 
 <section class="stats">
 
@@ -186,14 +323,20 @@ tr:nth-child(even) {
 
 </section>
 
+<!-- DASHBOARD -->
+
 <section class="panel">
 
 <h3>Account Dashboard</h3>
+
+<!-- PENCARIAN -->
 
 <input
   id="search"
   placeholder="🔍 Cari nama akun..."
 >
+
+<!-- TAMBAH AKUN -->
 
 <div class="controls">
 
@@ -203,16 +346,22 @@ tr:nth-child(even) {
   >
 
   <select id="newStatus">
+
     <option value="UNKNOWN">UNKNOWN</option>
+
     <option value="LIVE">LIVE</option>
+
     <option value="DEAD">DEAD</option>
+
   </select>
 
-  <button onclick="addAccount()">
+  <button class="add" onclick="addAccount()">
     + Tambah
   </button>
 
 </div>
+
+<!-- HAPUS TERPILIH -->
 
 <div class="controls">
 
@@ -225,12 +374,16 @@ tr:nth-child(even) {
 
 </div>
 
+<!-- TABEL -->
+
 <div class="tablewrap">
 
 <table>
 
 <thead>
+
 <tr>
+
   <th>
     <input
       type="checkbox"
@@ -240,11 +393,17 @@ tr:nth-child(even) {
   </th>
 
   <th>NO</th>
+
   <th>ACCOUNT</th>
+
   <th>STATUS</th>
+
   <th>ASSIGNED TO</th>
+
   <th>AKSI</th>
+
 </tr>
+
 </thead>
 
 <tbody id="rows">
@@ -266,11 +425,15 @@ Jangan masukkan password, token, atau cookies login.
 
 <script>
 
+// PENYIMPANAN DATA
+// Menggunakan KEY yang sama agar data lama tetap terbaca.
+
 const KEY = "fbmanager_accounts_v2";
 
 let accounts = [];
 
 try {
+
   const saved = JSON.parse(
     localStorage.getItem(KEY) || "[]"
   );
@@ -280,7 +443,9 @@ try {
   }
 
 } catch (e) {
+
   accounts = [];
+
 }
 
 const $ = id => document.getElementById(id);
@@ -349,7 +514,11 @@ function editAccount(id) {
   const cleanName = newName.trim();
 
   if (!cleanName) {
-    return alert("Nama akun tidak boleh kosong");
+
+    return alert(
+      "Nama akun tidak boleh kosong"
+    );
+
   }
 
   account.name = cleanName;
@@ -395,7 +564,7 @@ function deleteOne(id) {
 }
 
 
-// PILIH SEMUA AKUN
+// PILIH SEMUA
 
 function selectAll(checked) {
 
@@ -405,7 +574,7 @@ function selectAll(checked) {
 }
 
 
-// HAPUS AKUN TERPILIH
+// HAPUS TERPILIH
 
 function deleteSelected() {
 
@@ -414,10 +583,18 @@ function deleteSelected() {
   ].map(x => x.value);
 
   if (!ids.length) {
-    return alert("Pilih akun terlebih dahulu");
+
+    return alert(
+      "Pilih akun terlebih dahulu"
+    );
+
   }
 
-  if (confirm("Hapus " + ids.length + " akun?")) {
+  if (
+    confirm(
+      "Hapus " + ids.length + " akun?"
+    )
+  ) {
 
     accounts = accounts.filter(
       x => !ids.includes(x.id)
@@ -434,7 +611,12 @@ function deleteSelected() {
 
 function render() {
 
+  // JUMLAH TOTAL
+
   $("total").textContent = accounts.length;
+
+
+  // JUMLAH BERDASARKAN STATUS
 
   ["LIVE", "DEAD", "UNKNOWN"].forEach(status => {
 
@@ -445,9 +627,18 @@ function render() {
 
   });
 
+
+  // RESET CHECKBOX
+
   $("all").checked = false;
 
+
+  // PENCARIAN
+
   const query = $("search").value.toLowerCase();
+
+
+  // TABEL
 
   const tbody = $("rows");
 
@@ -455,7 +646,11 @@ function render() {
 
 
   accounts
-    .filter(a => a.name.toLowerCase().includes(query))
+
+    .filter(
+      a => a.name.toLowerCase().includes(query)
+    )
+
     .forEach((account, index) => {
 
       const tr = document.createElement("tr");
@@ -496,6 +691,11 @@ function render() {
 
       const select = document.createElement("select");
 
+      select.className = "status";
+
+
+      // PILIHAN STATUS
+
       ["UNKNOWN", "LIVE", "DEAD"].forEach(status => {
 
         const option = document.createElement("option");
@@ -508,10 +708,41 @@ function render() {
 
       });
 
+
+      // STATUS AKUN
+
       select.value = account.status;
 
-      select.onchange = () =>
-        changeStatus(account.id, select.value);
+
+      // WARNA STATUS
+
+      function updateStatusColor() {
+
+        select.classList.remove(
+          "status-live",
+          "status-dead",
+          "status-unknown"
+        );
+
+        select.classList.add(
+          "status-" + select.value.toLowerCase()
+        );
+
+      }
+
+      updateStatusColor();
+
+
+      // SIMPAN PERUBAHAN STATUS
+
+      select.onchange = () => {
+
+        changeStatus(
+          account.id,
+          select.value
+        );
+
+      };
 
       td3.append(select);
 
@@ -520,10 +751,10 @@ function render() {
 
       const td4 = document.createElement("td");
 
-      td4.textContent = account.assigned;
+      td4.textContent = account.assigned || "Unassigned";
 
 
-      // TOMBOL AKSI
+      // AKSI
 
       const td5 = document.createElement("td");
 
@@ -552,10 +783,15 @@ function render() {
         deleteOne(account.id);
 
 
-      td5.append(editButton, deleteButton);
+      // MASUKKAN TOMBOL
+
+      td5.append(
+        editButton,
+        deleteButton
+      );
 
 
-      // MASUKKAN KE TABEL
+      // MASUKKAN BARIS
 
       tr.append(
         td0,
@@ -581,7 +817,7 @@ $("search").addEventListener(
 );
 
 
-// TAMPILKAN SAAT WEBSITE DIBUKA
+// TAMPILKAN DASHBOARD
 
 render();
 
