@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FB Account Manager</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f3f5fa;
+      font-family: Arial, sans-serif;
+      color: #202638;
+    }
+    header {
+      background: #2368dc;
+      color: white;
+      padding: 20px;
+      font-size: 21px;
+      font-weight: bold;
+    }
+    main { padding: 15px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .stat {
+      background: white;
+      border-radius: 10px;
+      padding: 12px 4px;
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      font-size: 23px;
+    }
+    .stat small { font-size: 10px; }
+    .green { color: #15985a; }
+    .red { color: #d33e4c; }
+    .panel {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    button {
+      background: #6835db;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 13px 7px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    th { background: #f0f3f8; }
+    .status {
+      color: #148b4d;
+      background: #e5f9ee;
+      border-radius: 20px;
+      padding: 6px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>FB Account Manager</header>
+  <main>
+    <section class="stats">
+      <div class="stat"><strong id="total">0</strong><small>TOTAL</small></div>
+      <div class="stat"><strong class="green" id="live">0</strong><small>LIVE</small></div>
+      <div class="stat"><strong class="red">0</strong><small>DEAD</small></div>
+      <div class="stat"><strong>0</strong><small>UNKNOWN</small></div>
+    </section>
+    <section class="panel">
+      <h3>Account Dashboard</h3>
+      <input id="account" placeholder="Nama akun (data demo)">
+      <button onclick="addAccount()">+ Tambah Akun</button>
+      <table>
+        <thead>
+          <tr><th>NO</th><th>ACCOUNT</th><th>STATUS</th></tr>
+        </thead>
+        <tbody id="accounts"></tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    let accounts = [];
+    function addAccount() {
+      const input = document.getElementById("account");
+      const name = input.value.trim();
+      if (!name) return alert("Masukkan nama akun");
+      accounts.push(name);
+      input.value = "";
+      document.getElementById("total").textContent = accounts.length;
+      const tbody = document.getElementById("accounts");
+      tbody.innerHTML = "";
+      accounts.forEach((name, index) => {
+        const row = document.createElement("tr");
+        const number = document.createElement("td");
+        const account = document.createElement("td");
+        const status = document.createElement("td");
+        number.textContent = index + 1;
+        account.textContent = name;
+        status.textContent = "DEMO";
+        row.append(number, account, status);
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
